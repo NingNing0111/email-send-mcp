@@ -1,0 +1,20 @@
+# Compose v2 不再需要 version 字段
+services:
+  mail-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mail-mcp-server:latest
+    container_name: mail-mcp-server
+    env_file:
+      - .env
+    ports:
+      - "${MCP_PORT:-8000}:8000"
+    restart: unless-stopped
+    # Streamable HTTP 无标准 GET 健康页时用 TCP 探测端口
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8000)); s.close()\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

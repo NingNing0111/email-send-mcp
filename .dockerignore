@@ -1,0 +1,48 @@
+# Git / 本地
+.git
+.gitignore
+**/.git
+
+# 本地虚拟环境与缓存（绝不打进镜像）
+.venv
+**/__pycache__
+**/*.py[cod]
+*$py.class
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
+
+# 环境与密钥（运行时由 compose env_file 或 -e 注入）
+.env
+.env.*
+!.env.example
+
+# IDE / OS
+.vscode
+.idea
+*.iml
+.DS_Store
+Thumbs.db
+
+# 构建产物与归档
+dist
+build
+*.egg
+*.whl
+*.tar.gz
+*.zip
+
+# 日志与本地数据
+*.log
+*.db
+*.sqlite3
+
+# 文档与 CI（运行时不需）
+*.md
+!README.md
+.github
+
+# Agent / 临时
+terminals
+agent-transcripts
